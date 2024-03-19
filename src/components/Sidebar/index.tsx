@@ -1,8 +1,8 @@
 export const Sidebar = () => {
   return (
-    <aside className="w-72 bg-slate-800 min-h-full h-screen flex flex-col items-center pt-5 pb-2 space-y-7">
+    <aside className="w-72 bg-slate-800  min-h-screen flex flex-col items-center pt-5 pb-2 space-y-7">
       <div className="w-full pr-3 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm">
-        <div className="font-QuicksandMedium pl-4 text-gray-400/60 text-xs text-[11px] uppercase">
+        <div className=" pl-4 text-gray-400/60 text-xs text-[11px] uppercase">
           Menu
         </div>
 
@@ -19,7 +19,7 @@ export const Sidebar = () => {
               <path d="M5 22h14a2 2 0 0 0 2-2v-9a1 1 0 0 0-.29-.71l-8-8a1 1 0 0 0-1.41 0l-8 8A1 1 0 0 0 3 11v9a2 2 0 0 0 2 2zm5-2v-5h4v5zm-5-8.59 7-7 7 7V20h-3v-5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v5H5z"></path>
             </svg>
 
-            <span className="font-QuicksandMedium">Produtos</span>
+            <span className="">Produtos</span>
           </div>
         </div>
       </div>

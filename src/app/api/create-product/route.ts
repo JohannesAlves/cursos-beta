@@ -1,17 +1,34 @@
+import { v4 as uuidv4 } from 'uuid';
+import fs from 'fs';
+import path from 'path';
 import { NextRequest, NextResponse } from 'next/server';
-import { v4 } from 'uuid';
 
-import db from '@/mock/db.json';
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  rating: number;
+  categorys: string[];
+}
+
+const dbFilePath = path.join(process.cwd(), 'data', 'db.json');
 
 export async function POST(request: NextRequest, response: NextResponse) {
-  const { title, description, price, rating, categorys } = await request.json();
+  const { title, description, price, rating, categorys }: Product =
+    await request.json();
 
   if (!title || !description || !price || !rating || !categorys) {
-    return NextResponse.json({ message: 'empty data' }, { status: 400 });
+    return NextResponse.json({ message: 'Dados incompletos' }, { status: 400 });
   }
 
-  const formattedData = {
-    id: v4(),
+  // Lê o arquivo JSON
+  const dbData: { products: Product[] } = JSON.parse(
+    fs.readFileSync(dbFilePath, 'utf-8')
+  );
+
+  const formattedData: Product = {
+    id: uuidv4(),
     title,
     description,
     price,
@@ -19,13 +36,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
     categorys,
   };
 
-  // push into mock
-  db.products.push(formattedData);
+  // Adiciona os novos dados ao array existente
+  dbData.products.push(formattedData);
 
-  console.log(db);
+  // Escreve o arquivo JSON atualizado
+  fs.writeFileSync(dbFilePath, JSON.stringify(dbData, null, 2));
 
   return NextResponse.json({
-    message: 'Product create successful',
+    message: 'Produto criado com sucesso',
     data: formattedData,
   });
 }

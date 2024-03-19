@@ -6,7 +6,20 @@
       "description": "Com o material mais completo do mercado, o Curso de Formação de Perícia Grafotécnica te capacita a atuar nos tribunais do país sem prestar concurso e usando os conhecimentos da sua formação. Se você busca se tornar um especialista na área de Perícia Grafotécnica, nosso curso de Perícia Grafotécnica é a escolha certa para a sua formação.",
       "price": 797,
       "rating": 4.69,
-      "categorys": ["pericia", "tecnico"]
+      "categorys": [
+        "pericia",
+        "tecnico"
+      ]
+    },
+    {
+      "id": "68acc883-77a1-4cd9-811a-01033c97c802",
+      "title": "Curso de Perito",
+      "description": "Cursos......",
+      "price": 500,
+      "rating": 4.9,
+      "categorys": [
+        "pericia"
+      ]
     }
   ]
 }
