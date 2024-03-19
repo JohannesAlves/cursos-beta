@@ -22,8 +22,6 @@ export const HomeTemplate = () => {
 
   return (
     <main className="flex">
-      <Sidebar />
-
       <div className="flex flex-col items-center justify-center w-full bg-gradient-to-r from-slate-500 to-slate-800 p-5">
         <div className="flex gap-2">
           <button className="text-gray-400 border-2 px-6 py-1 border-gray-700 rounded-lg hover:text-red-500 transition-all">
