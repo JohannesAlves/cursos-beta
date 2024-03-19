@@ -29,9 +29,13 @@ export async function POST(request: NextRequest, response: NextResponse) {
   };
 
   const createdProduct = await prisma.product.create({
-    data: formattedData,
+    data: {
+      ...formattedData,
+      categorys: {
+        connect: [{ id: 1 }],
+      },
+    },
   });
-
   console.log(createdProduct);
 
   return NextResponse.json({
