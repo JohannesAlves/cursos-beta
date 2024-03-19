@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import PencilIcon from '@/assets/icons/pencil.svg';
 import Image from 'next/image';
 import { formatNumberToCurrency } from '@/utils/format-number-toCurrency';
+import { Container } from '@/components/Container';
 
 export const HomeTemplate = () => {
   const [products, setProducts] = useState<IProduct[]>();
@@ -22,8 +23,8 @@ export const HomeTemplate = () => {
 
   return (
     <main className="flex">
-      <div className="flex flex-col items-center justify-center w-full bg-gradient-to-r from-slate-500 to-slate-800 p-5">
-        <div className="flex gap-2">
+      <Container>
+        <div className="flex gap-2 justify-center">
           <button className="text-gray-400 border-2 px-6 py-1 border-gray-700 rounded-lg hover:text-red-500 transition-all">
             CREATE PRODUCT
           </button>
@@ -102,7 +103,7 @@ export const HomeTemplate = () => {
             </table>
           </div>
         </div>
-      </div>
+      </Container>
     </main>
   );
 };

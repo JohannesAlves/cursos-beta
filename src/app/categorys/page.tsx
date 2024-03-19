@@ -1,3 +1,5 @@
+import { CategorysTemplate } from '@/templates/Categorys';
+
 export default function Categorys() {
-  return <h1>teste</h1>;
+  return <CategorysTemplate />;
 }
