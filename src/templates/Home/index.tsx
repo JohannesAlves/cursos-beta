@@ -6,6 +6,7 @@ import { Table } from '@/components/Table';
 
 import { IProduct } from '@/providers/dto/allProductsDto';
 import { GetAllProducts } from '@/providers/useCases/get-all-products-usecase';
+import { formatNumberToCurrency } from '@/utils/format-number-toCurrency';
 
 export const HomeTemplate = () => {
   const [products, setProducts] = useState<IProduct[]>();
@@ -27,10 +28,9 @@ export const HomeTemplate = () => {
     { name: 'ID', key: 'id' },
     { name: 'Title', key: 'title' },
     { name: 'Price', key: 'price' },
-    { name: 'Category', key: 'categorys' },
-    { name: 'Brand', key: 'brand' },
-    { name: 'Description', key: 'description' },
     { name: 'Rating', key: 'rating' },
+    { name: 'Description', key: 'description' },
+    { name: 'Category', key: 'categorys' },
   ];
 
   return (
@@ -50,9 +50,11 @@ export const HomeTemplate = () => {
             >
               <td className="py-4 px-6">{product.id}</td>
               <td className="py-4 px-6">{product.title}</td>
-              <td className="py-4 px-6">{product.description}</td>
-              <td className="py-4 px-6">{product.price}</td>
+              <td className="py-4 px-6">
+                {formatNumberToCurrency(product.price)}
+              </td>
               <td className="py-4 px-6">{product.rating}</td>
+              <td className="py-4 px-6">{product.description}</td>
               <td className="py-4 px-6">
                 {product.categorys.map((category) =>
                   category.title.toUpperCase()
