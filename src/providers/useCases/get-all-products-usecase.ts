@@ -1,12 +1,12 @@
-import { DummyJsonProvider } from '../DummyJsonApi';
 import { IAllProducts } from '../dto/allProductsDto';
+import { fakeApiProvider } from '../fakeApi';
 
-const provider = new DummyJsonProvider();
+const provider = new fakeApiProvider();
 
 export async function GetAllProducts() {
   const products = await provider.request(
     'GET',
-    '/products',
+    '/get-products',
     {} as IAllProducts
   );
 

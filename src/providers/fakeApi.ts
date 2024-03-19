@@ -9,12 +9,12 @@ import {
 import { NotFoundException } from '@/core/Exceptions/ExceptionCodes';
 import Cookies from 'js-cookie';
 
-const DummyJsonApiUrl = 'https://dummyjson.com';
+const fakeApiUrl = 'http://localhost:3000/api';
 
-export class DummyJsonProvider {
+export class fakeApiProvider {
   private readonly base_url: string;
   constructor() {
-    this.base_url = DummyJsonApiUrl || '';
+    this.base_url = fakeApiUrl || '';
   }
 
   async request(

@@ -20,6 +20,16 @@
       "categorys": [
         "pericia"
       ]
+    },
+    {
+      "id": "d8e9b5af-f43d-4df8-8ac4-5589a3387092",
+      "title": "Curso de Perito",
+      "description": "Cursos......",
+      "price": 500,
+      "rating": 4.9,
+      "categorys": [
+        "pericia"
+      ]
     }
   ]
 }
