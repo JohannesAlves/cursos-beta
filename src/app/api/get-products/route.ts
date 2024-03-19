@@ -1,12 +1,10 @@
+import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
-import path from 'path';
-import fs from 'fs';
-
-const dbFilePath = path.join(process.cwd(), 'data', 'db.json');
+const prisma = new PrismaClient();
 
 export async function GET() {
-  const dbData = JSON.parse(fs.readFileSync(dbFilePath, 'utf-8'));
+  const products = await prisma.product.findMany();
 
-  return NextResponse.json(dbData);
+  return NextResponse.json(products);
 }

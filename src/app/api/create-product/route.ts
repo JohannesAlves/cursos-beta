@@ -2,9 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
 
 interface Product {
-  id: string;
   title: string;
   description: string;
   price: number;
@@ -12,38 +12,30 @@ interface Product {
   categorys: string[];
 }
 
-const dbFilePath = path.join(process.cwd(), 'data', 'db.json');
+const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest, response: NextResponse) {
-  const { title, description, price, rating, categorys }: Product =
-    await request.json();
+  const { title, description, price, rating }: Product = await request.json();
 
-  if (!title || !description || !price || !rating || !categorys) {
+  if (!title || !description || !price || !rating) {
     return NextResponse.json({ message: 'Dados incompletos' }, { status: 400 });
   }
 
-  // Lê o arquivo JSON
-  const dbData: { products: Product[] } = JSON.parse(
-    fs.readFileSync(dbFilePath, 'utf-8')
-  );
-
-  const formattedData: Product = {
-    id: uuidv4(),
+  const formattedData = {
     title,
     description,
     price,
     rating,
-    categorys,
   };
 
-  // Adiciona os novos dados ao array existente
-  dbData.products.push(formattedData);
+  const createdProduct = await prisma.product.create({
+    data: formattedData,
+  });
 
-  // Escreve o arquivo JSON atualizado
-  fs.writeFileSync(dbFilePath, JSON.stringify(dbData, null, 2));
+  console.log(createdProduct);
 
   return NextResponse.json({
     message: 'Produto criado com sucesso',
-    data: formattedData,
+    data: createdProduct,
   });
 }
