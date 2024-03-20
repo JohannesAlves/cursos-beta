@@ -66,7 +66,8 @@ export const HomeTemplate = () => {
                     {product.categorys.map((category, index) => (
                       <span key={index}>
                         {category.title.toUpperCase()}
-                        {index < product.categorys.length - 1 && ' '}{' '}
+                        {index < product.categorys.length - 1 && ' '}
+                        {' - '}
                       </span>
                     ))}
                   </td>
