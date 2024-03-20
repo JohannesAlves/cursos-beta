@@ -20,6 +20,9 @@ export const useHome = () => {
   const modalDeleteProduct = useModal();
   const [selectedProduct, setSelectedProduct] = useState<IProduct>();
   const [products, setProducts] = useState<IProduct[]>();
+  const [checkedItems, setCheckedItems] = useState<
+    { id: number }[] | undefined
+  >();
   const {
     register,
     handleSubmit,
@@ -47,8 +50,20 @@ export const useHome = () => {
     { name: '' },
   ];
 
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name } = event.target;
+    setCheckedItems((prev) => {
+      if (prev) {
+        return [...prev, { id: Number(name) }];
+      } else {
+        // Handle the case where prev is null or undefined
+        return [{ id: Number(name) }];
+      }
+    });
+  };
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { title, price, rating, description, categorys } = data;
+    const { title, price, rating, description } = data;
 
     try {
       const product = await CreateProduct({
@@ -56,6 +71,7 @@ export const useHome = () => {
         price: Number(price),
         rating: Number(rating),
         description,
+        categorys: checkedItems,
       });
 
       if (product.isSuccess) {
@@ -93,5 +109,8 @@ export const useHome = () => {
     onSubmit,
 
     onSubmitDelete,
+
+    checkedItems,
+    handleCheckboxChange,
   };
 };

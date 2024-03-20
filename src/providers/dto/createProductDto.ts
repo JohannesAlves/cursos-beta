@@ -3,4 +3,5 @@ interface ICreateProduct {
   description: string;
   price: number;
   rating: number;
+  categorys: { id: number }[] | undefined;
 }
