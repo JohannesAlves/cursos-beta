@@ -5,7 +5,7 @@ import { Table } from '@/components/Table';
 
 import { formatNumberToCurrency } from '@/utils/format-number-toCurrency';
 import { useHome } from './container';
-import { PencilIcon, XMarkIcon } from '@heroicons/react/16/solid';
+import { CheckIcon, PencilIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import { CategorysTemplate } from '../Categorys';
 import { Button } from '@/components/Button';
 import { Modal } from '@/components/Modal';
@@ -13,11 +13,15 @@ import { Modal } from '@/components/Modal';
 export const HomeTemplate = () => {
   const {
     modalCreateProduct,
+    modalDeleteProduct,
     columns,
     products,
+    selectedProduct,
+    setSelectedProduct,
     register,
     handleSubmit,
     onSubmit,
+    onSubmitDelete,
   } = useHome();
 
   return (
@@ -59,7 +63,12 @@ export const HomeTemplate = () => {
                     </button>
                   </td>
                   <td>
-                    <button>
+                    <button
+                      onClick={() => {
+                        modalDeleteProduct.toggle();
+                        setSelectedProduct(product);
+                      }}
+                    >
                       <XMarkIcon
                         width={25}
                         height={25}
@@ -74,6 +83,7 @@ export const HomeTemplate = () => {
         </div>
       </Container>
 
+      {/* Modal create product */}
       <Modal
         isOpen={modalCreateProduct.isOpen}
         onClose={modalCreateProduct.toggle}
@@ -136,6 +146,39 @@ export const HomeTemplate = () => {
             </div>
 
             <Button text="CRIAR" />
+          </form>
+        </div>
+      </Modal>
+
+      {/* Modal delete product */}
+      <Modal
+        isOpen={modalDeleteProduct.isOpen}
+        onClose={modalDeleteProduct.toggle}
+      >
+        <div className="w-[30rem] h-[20rem] bg-slate-800 rounded-lg p-10">
+          <h3 className="text-xl">
+            Deletar Produto - {selectedProduct?.title}
+          </h3>
+          <hr className="h-px my-8 border-0 bg-gray-700" />
+
+          <form onSubmit={handleSubmit(onSubmitDelete)}>
+            <div className="flex justify-center items-center gap-10">
+              <button>
+                <CheckIcon
+                  width={80}
+                  height={80}
+                  className="text-gray-400 hover:text-green-600"
+                />
+              </button>
+
+              <button onClick={() => modalDeleteProduct.toggle()}>
+                <XMarkIcon
+                  width={80}
+                  height={80}
+                  className="text-gray-400 hover:text-red-500"
+                />
+              </button>
+            </div>
           </form>
         </div>
       </Modal>
