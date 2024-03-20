@@ -41,7 +41,7 @@ export const HomeTemplate = () => {
               onClick={() => modalCreateCategory.toggle()}
             />
 
-            <CategorysTemplate />
+            <CategorysTemplate categorys={categorys} />
           </div>
 
           <div>

@@ -3,9 +3,14 @@ import { Container } from '@/components/Container';
 import { useCategorys } from './container';
 import { Table } from '@/components/Table';
 import { Button } from '@/components/Button';
+import { ICategory } from '@/providers/dto/allProductsDto';
 
-export const CategorysTemplate = () => {
-  const { cols, categorys } = useCategorys();
+export const CategorysTemplate = ({
+  categorys,
+}: {
+  categorys: ICategory[] | undefined;
+}) => {
+  const { cols } = useCategorys();
 
   return (
     <div className="flex flex-col">
