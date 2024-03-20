@@ -6,6 +6,8 @@ import useModal from '@/hooks/useModal';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CreateProduct } from '@/providers/useCases/create-product-usecase';
 import { DeleteProduct } from '@/providers/useCases/delete-product-usecase';
+import { useCategorys } from '../Categorys/container';
+import { useRouter } from 'next/router';
 
 type Inputs = {
   title: string;
@@ -16,6 +18,8 @@ type Inputs = {
 };
 
 export const useHome = () => {
+  const { categorys, modalCreateCategory, onSubmitCreateCategory } =
+    useCategorys();
   const modalCreateProduct = useModal();
   const modalDeleteProduct = useModal();
   const [selectedProduct, setSelectedProduct] = useState<IProduct>();
@@ -82,7 +86,7 @@ export const useHome = () => {
     }
   };
 
-  const onSubmitDelete = async (data: any) => {
+  const onSubmitDelete = async () => {
     try {
       await DeleteProduct({ id: Number(selectedProduct?.id) });
       modalDeleteProduct.toggle();
@@ -93,7 +97,11 @@ export const useHome = () => {
 
   useEffect(() => {
     getProducts();
-  }, [modalCreateProduct.isOpen, modalDeleteProduct.isOpen]);
+  }, [
+    modalCreateProduct.isOpen,
+    modalDeleteProduct.isOpen,
+    modalCreateCategory.isOpen,
+  ]);
 
   return {
     columns,
@@ -112,5 +120,9 @@ export const useHome = () => {
 
     checkedItems,
     handleCheckboxChange,
+
+    categorys,
+    modalCreateCategory,
+    onSubmitCreateCategory,
   };
 };

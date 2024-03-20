@@ -9,8 +9,6 @@ export const CategorysTemplate = () => {
 
   return (
     <div className="flex flex-col">
-      <Button text="CRIAR CATEGORIA" />
-
       <Table cols={cols}>
         {categorys?.map((category) => (
           <tr
