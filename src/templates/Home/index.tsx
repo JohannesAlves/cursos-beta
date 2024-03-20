@@ -10,7 +10,6 @@ import {
   PencilIcon,
   XMarkIcon,
 } from '@heroicons/react/16/solid';
-import Categorys from '@/app/categorys/page';
 import { CategorysTemplate } from '../Categorys';
 import { Button } from '@/components/Button';
 
