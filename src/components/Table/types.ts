@@ -1,6 +1,6 @@
 export interface IColumn {
   name: string;
-  key: string;
+  key?: string;
   icon?: React.ReactNode;
 }
 

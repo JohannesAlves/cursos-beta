@@ -1,37 +1,18 @@
 'use client';
-import { useEffect, useState } from 'react';
 
 import { Container } from '@/components/Container';
 import { Table } from '@/components/Table';
 
-import { IProduct } from '@/providers/dto/allProductsDto';
-import { GetAllProducts } from '@/providers/useCases/get-all-products-usecase';
 import { formatNumberToCurrency } from '@/utils/format-number-toCurrency';
+import { useHome } from './container';
+import {
+  LockClosedIcon,
+  PencilIcon,
+  XMarkIcon,
+} from '@heroicons/react/16/solid';
 
 export const HomeTemplate = () => {
-  const [products, setProducts] = useState<IProduct[]>();
-
-  async function getProducts() {
-    try {
-      const data = await GetAllProducts();
-      setProducts(data.value);
-    } catch (error) {
-      return error;
-    }
-  }
-
-  useEffect(() => {
-    getProducts();
-  }, []);
-
-  const columns = [
-    { name: 'ID', key: 'id' },
-    { name: 'Title', key: 'title' },
-    { name: 'Price', key: 'price' },
-    { name: 'Rating', key: 'rating' },
-    { name: 'Description', key: 'description' },
-    { name: 'Category', key: 'categorys' },
-  ];
+  const { columns, products } = useHome();
 
   return (
     <main className="flex">
@@ -59,6 +40,24 @@ export const HomeTemplate = () => {
                 {product.categorys.map((category) =>
                   category.title.toUpperCase()
                 )}
+              </td>
+              <td>
+                <button>
+                  <PencilIcon
+                    width={25}
+                    height={25}
+                    className="hover:text-gray-600"
+                  />
+                </button>
+              </td>
+              <td>
+                <button>
+                  <XMarkIcon
+                    width={25}
+                    height={25}
+                    className="hover:text-red-500"
+                  />
+                </button>
               </td>
             </tr>
           ))}
