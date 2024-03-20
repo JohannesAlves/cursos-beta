@@ -21,15 +21,6 @@ export const Sidebar = () => {
         >
           Produtos
         </SidebarItem>
-
-        <SidebarItem
-          onClick={() => handleItemClick(1)}
-          isActive={activeItem === 1}
-          href="/categorys"
-          icon={<TagIcon width={20} height={20} />}
-        >
-          Categorias
-        </SidebarItem>
       </div>
     </aside>
   );
