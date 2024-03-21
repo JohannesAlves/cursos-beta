@@ -8,8 +8,7 @@ const nextConfig = {
         { key: 'Access-Control-Allow-Credentials', value: 'true' },
         {
           key: 'Access-Control-Allow-Origin',
-          value:
-            'https://cursos-beta-4pb36vkor-johannes-projects-6f05f567.vercel.app',
+          value: 'https://cursos-beta-plum.vercel.app',
         }, // replace this your actual origin
         {
           key: 'Access-Control-Allow-Methods',
