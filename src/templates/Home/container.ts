@@ -8,8 +8,10 @@ import { CreateProduct } from '@/providers/useCases/create-product-usecase';
 import { DeleteProduct } from '@/providers/useCases/delete-product-usecase';
 import { useCategorys } from '../Categorys/container';
 import { useRouter } from 'next/router';
+import { UpdateProduct } from '@/providers/useCases/update-product-usecase';
 
 type Inputs = {
+  id?: number;
   title: string;
   price: number;
   rating: number;
@@ -21,6 +23,7 @@ export const useHome = () => {
   const { categorys, modalCreateCategory, onSubmitCreateCategory } =
     useCategorys();
   const modalCreateProduct = useModal();
+  const modalUpdateProduct = useModal();
   const modalDeleteProduct = useModal();
   const [selectedProduct, setSelectedProduct] = useState<IProduct>();
   const [products, setProducts] = useState<IProduct[]>();
@@ -95,12 +98,34 @@ export const useHome = () => {
     }
   };
 
+  const onSubmitUpdate: SubmitHandler<Inputs> = async (data) => {
+    const { title, price, rating, description } = data;
+
+    try {
+      if (selectedProduct) {
+        const updatedProduct = await UpdateProduct({
+          id: selectedProduct.id,
+          title,
+          price: Number(price),
+          rating: Number(rating),
+          description,
+          categorys: checkedItems,
+        });
+
+        if (updatedProduct.isSuccess) modalUpdateProduct.toggle();
+      }
+    } catch (error) {
+      return error;
+    }
+  };
+
   useEffect(() => {
     getProducts();
   }, [
     modalCreateProduct.isOpen,
     modalDeleteProduct.isOpen,
     modalCreateCategory.isOpen,
+    modalUpdateProduct.isOpen,
   ]);
 
   return {
@@ -108,15 +133,17 @@ export const useHome = () => {
     products,
     modalCreateProduct,
     modalDeleteProduct,
+    modalUpdateProduct,
     selectedProduct,
     setSelectedProduct,
 
     register,
     handleSubmit,
     watch,
-    onSubmit,
 
+    onSubmit,
     onSubmitDelete,
+    onSubmitUpdate,
 
     checkedItems,
     handleCheckboxChange,

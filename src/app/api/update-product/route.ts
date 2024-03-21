@@ -21,7 +21,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     description,
     price,
     rating,
-    categorys,
   };
 
   const updatedProduct = await prisma.product.update({
@@ -30,6 +29,12 @@ export async function POST(request: NextRequest, response: NextResponse) {
     },
     data: {
       ...formattedData,
+      categorys: {
+        set: categorys,
+      },
+    },
+    include: {
+      categorys: true,
     },
   });
 
