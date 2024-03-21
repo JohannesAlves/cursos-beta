@@ -34,6 +34,13 @@ export class fakeApiProvider {
         result = await axios
           .get(`${url}`, {
             headers: {
+              'Access-Control-Allow-Origin':
+                'https://cursos-beta-plum.vercel.app',
+              'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+              'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+              'Access-Control-Allow-Credentials': 'true',
+              'Access-Control-Expose-Headers': 'Content-Length',
+              'Access-Control-Max-Age': '3600',
               'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
