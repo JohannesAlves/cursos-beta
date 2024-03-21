@@ -9,8 +9,7 @@ import {
 import { NotFoundException } from '@/core/Exceptions/ExceptionCodes';
 import Cookies from 'js-cookie';
 
-const fakeApiUrl =
-  'https://cursos-beta-4pb36vkor-johannes-projects-6f05f567.vercel.app/api';
+const fakeApiUrl = 'https://cursos-beta-plum.vercel.app/api';
 
 export class fakeApiProvider {
   private readonly base_url: string;
